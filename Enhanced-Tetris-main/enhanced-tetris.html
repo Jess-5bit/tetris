@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Box Dude's Vintage Tetris</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Box Dude's Vintage Tetris</title>
+  <style>
     @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
     :root {
@@ -15,18 +14,16 @@
       --grid-line: #222222;
       --text-glow: 0 0 5px rgba(57, 255, 20, 0.8);
     }
-
-    body {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    html, body {
       margin: 0;
       padding: 0;
-      width: 100vw;
-      height: 100vh;
+      height: 100%;
+      width: 100%;
       overflow: hidden;
+      background: var(--bg-dark);
+    }   
+
+    body {
       margin: 0;
       padding: 20px;
       min-height: 100vh;
@@ -44,12 +41,12 @@
           rgba(57, 255, 20, 0.04) 2px,
           rgba(57, 255, 20, 0.04) 4px
         );
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .game-title {
-      margin-top:30px;
-      font-size: 18px;
+      font-size: 24px;
+      margin-bottom: 20px;
       color: var(--tetris-cyan);
       text-shadow: var(--text-glow);
       text-transform: uppercase;
@@ -124,17 +121,15 @@
       100% { opacity: 0.24387; }
     }
 
-    .game-container {
-      flex: 1;
-      width: 100vw;
-      height: 100vh;
-      justify-content: center;
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 30px;
-      position: relative;
-    }
+  .game-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
 
     .side-container {
       display: flex;
@@ -318,40 +313,39 @@
   </style>
 </head>
 <body>
-<h1 class="game-title">Box Dude's Tetris</h1>
-<div id="stats">
-<div id="score">SCORE:0</div>
-<div id="level">LEVEL:1</div>
-</div>
-<div class="high-score" id="high-score">HIGH SCORE:0</div>
-<div class="crt game-container">
-<div class="hold-container pulse">
-<div class="hold-label">HOLD</div>
-<canvas height="80" id="hold" width="100"></canvas>
-</div>
-<canvas height="320" id="tetris" width="240"></canvas>
-<div class="side-container">
-<div class="preview-container pulse">
-<div class="preview-label">NEXT</div>
-<canvas height="80" id="preview" width="100"></canvas>
-</div>
-</div>
-<div class="scan-line"></div>
-</div>
-<div id="controls">
-<div class="control-title">Controls</div>
-    ← → : Move<br/>
-    ↑ : Rotate<br/>
-    ↓ : Drop<br/>
-    SPACE : Hard Drop<br/>
-    SHIFT : Hold<br/>
-    P : Pause/Resume
+  <h1 class="game-title">Box Dude's Tetris</h1>
+
+  <div id="stats">
+    <div id="score">SCORE:0</div>
+    <div id="level">LEVEL:1</div>
   </div>
-<!-- Boot overlay -->
-<div class="boot-overlay" id="bootOverlay">
-<p id="bootText"></p>
-</div>
-<script>
+
+  <div id="high-score" class="high-score">HIGH SCORE:0</div>
+
+  <div class="crt game-container">
+    <div class="hold-container pulse">
+      <div class="hold-label">HOLD</div>
+      <canvas id="hold" width="100" height="100"></canvas>
+    </div>
+
+    <canvas id="tetris" width="240" height="400"></canvas>
+
+    <div class="side-container">
+      <div class="preview-container pulse">
+        <div class="preview-label">NEXT</div>
+        <canvas id="preview" width="100" height="100"></canvas>
+      </div>
+    </div>
+    <div class="scan-line"></div>
+  </div>
+
+
+  <!-- Boot overlay -->
+  <div id="bootOverlay" class="boot-overlay">
+    <p id="bootText"></p>
+  </div>
+
+  <script>
     // Global AudioContext
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
