@@ -33,12 +33,12 @@
           rgba(57, 255, 20, 0.04) 2px,
           rgba(57, 255, 20, 0.04) 4px
         );
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     .game-title {
-      font-size: 24px;
-      margin-bottom: 20px;
+      margin-top:30px;
+      font-size: 18px;
       color: var(--tetris-cyan);
       text-shadow: var(--text-glow);
       text-transform: uppercase;
@@ -151,12 +151,17 @@
     }
 
     #tetris {
-      image-rendering: pixelated;
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      background-color: black;
-    }
+    width: 240px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(calc(min(100vw / 240, 100vh / 400)));
+    transform-origin: top left;
+    image-rendering: pixelated;
+    border: none;
+    background-color: black;
+}
 
     #preview,
     #hold {
@@ -297,15 +302,15 @@
   <div class="crt game-container">
     <div class="hold-container pulse">
       <div class="hold-label">HOLD</div>
-      <canvas id="hold" width="100" height="100"></canvas>
+      <canvas id="hold" width="100" height="80"></canvas>
     </div>
 
-    <canvas id="tetris" width="240" height="400"></canvas>
+    <canvas id="tetris" width="240" height="320"></canvas>
 
     <div class="side-container">
       <div class="preview-container pulse">
         <div class="preview-label">NEXT</div>
-        <canvas id="preview" width="100" height="100"></canvas>
+        <canvas id="preview" width="100" height="80"></canvas>
       </div>
     </div>
     <div class="scan-line"></div>
